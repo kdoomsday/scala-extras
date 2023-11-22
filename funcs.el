@@ -3,13 +3,13 @@
   (let ((region (region-beginning))
         (end (region-end))
         (buffer (get-buffer-create scala-extras-output-buffer-name)))
-    (call-process-region region end "scala-cli" nil buffer t "_.sc" "-q")))
+    (call-process-region region end scala-extras-command nil buffer t "_.sc" "-q")))
 
 (defun scala-extras-execute-buffer ()
   "Run scala-cli on the contents of the entire buffer"
   (let ((buffer (get-buffer-create scala-extras-output-buffer-name))
         (mode (scala-extras-select-mode)))
-    (call-process-region nil nil "scala-cli" nil buffer t mode "-q")))
+    (call-process-region nil nil scala-extras-command nil buffer t mode "-q")))
 
 (defun scala-extras-execute ()
   "Run a shell command on the current region and open the output in a new buffer."
