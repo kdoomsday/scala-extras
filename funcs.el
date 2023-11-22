@@ -48,4 +48,10 @@
 
 (defun scala-extras-create-buffer ()
   "Get or create the output buffer"
-  (get-buffer-create scala-extras-output-buffer-name '((q . delete-window))))
+  (let ((buffer (get-buffer-create scala-extras-output-buffer-name '((q . delete-window)))))
+    (if (null scala-extras-keep-buffer-contents)
+        (let ((currbuf (current-buffer)))
+          (switch-to-buffer buffer)
+          (erase-buffer)
+          (switch-to-buffer currbuf)))
+    buffer))
