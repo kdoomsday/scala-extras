@@ -13,27 +13,26 @@
 - [[#description][Description]]
   - [[#features][Features:]]
 - [[#install][Install]]
-- [[#key-bindings][Key bindings]]
 
 * Description
 This layer adds support for running scala code directly through =scala-cli=.
 
 ** Features:
-  - Run scala scripts directly
+  - Run scala scripts directly via =scala-cli=
+
+The main functions to be aware of are ~scala-extras-execute~ and
+~scala-extras-execute-directory~. Both also have ~-and-switch~ versions that
+switch to the output buffer.
+
+All modes depend on the variable ~scala-extras-output-buffer-name~, which is the
+buffer name to use for output. The buffer will be created if it does not exist.
+
+The first mode, ~scala-extras-execute~, runs the selected region (or full buffer
+if no region) and sends the output to the output buffer. The second,
+~scala-extras-execute-directory~, gets the directory of the active buffer and
+sends that to scala-cli, to run as a project.
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
 add =scala-extras= to the existing =dotspacemacs-configuration-layers= list in this
 file.
-
-* Key bindings
-
-| Key Binding | Description    |
-|-------------+----------------|
-| ~SPC x x x~ | Does thing01   |
-
-# Use GitHub URLs if you wish to link a Spacemacs documentation file or its heading.
-# Examples:
-# [[https://github.com/syl20bnr/spacemacs/blob/master/doc/VIMUSERS.org#sessions]]
-# [[https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Bfun/emoji/README.org][Link to Emoji layer README.org]]
-# If space-doc-mode is enabled, Spacemacs will open a local copy of the linked file.
