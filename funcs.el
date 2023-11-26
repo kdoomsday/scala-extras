@@ -17,20 +17,20 @@
   (interactive)
   (scala-extras-execute t))
 
-(defun scala-extras-execute-directory ()
+(defun scala-extras-execute-directory (&optional switch)
   "Send the entire directory as a scala-cli project"
   (interactive)
   (let ((directory (file-name-directory (buffer-file-name))))
     (if (null directory)
         (message "Buffer is not visiting a file")
       (let ((buffer (scala-extras-create-buffer)))
-        (call-process-region nil nil scala-extras-command nil buffer t "." "-q")))))
+        (call-process-region nil nil scala-extras-command nil buffer t "." "-q")
+        (if switch (switch-to-buffer buffer))))))
 
 (defun scala-extras-execute-directory-and-switch ()
   "Send directory as scala-cli project and switch to results buffer"
   (interactive)
-  (scala-extras-execute-directory)
-  (switch-to-buffer scala-extras-output-buffer-name))
+  (scala-extras-execute-directory t))
 
 (defun scala-extras-select-mode ()
   "Select the mode to use for running code, as per the buffer name"
