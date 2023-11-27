@@ -20,7 +20,7 @@
 (defun scala-extras-execute-directory (&optional switch)
   "Send the entire directory as a scala-cli project"
   (interactive)
-  (let ((directory (file-name-directory (buffer-file-name))))
+  (let ((directory (file-name-directory (if buffer-file-name buffer-file-name ""))))
     (if (null directory)
         (message "Buffer is not visiting a file")
       (let ((buffer (scala-extras-create-buffer)))
