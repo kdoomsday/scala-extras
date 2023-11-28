@@ -23,9 +23,13 @@
   (let ((directory (file-name-directory (if buffer-file-name buffer-file-name ""))))
     (if (null directory)
         (message "Buffer is not visiting a file")
-      (let ((buffer (scala-extras-create-buffer)))
-        (call-process-region nil nil scala-extras-command nil buffer t "." "-q")
-        (if switch (switch-to-buffer buffer))))))
+      (progn
+        (when (and (buffer-modified-p (current-buffer))
+                   (yes-or-no-p (format "Buffer '%s' has not been saved. Save now?" (buffer-name))))
+          (save-buffer (current-buffer)))
+        (let ((buffer (scala-extras-create-buffer)))
+          (call-process-region nil nil scala-extras-command nil buffer t "." "-q")
+          (if switch (switch-to-buffer buffer)))))))
 
 (defun scala-extras-execute-directory-and-switch ()
   "Send directory as scala-cli project and switch to results buffer"
