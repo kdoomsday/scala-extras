@@ -9,3 +9,6 @@
   "Whether to keep the output buffer contents between runs
   If non nil, the buffer will not be cleared between subsequent runs. Output will
   be inserted at point, wherever that happens to be.")
+
+(defvar scala-extras-execution-arguments "-q"
+  "Extra arguments to be passed to scala-cli when calling")

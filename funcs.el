@@ -28,7 +28,7 @@
                    (yes-or-no-p (format "Buffer '%s' has not been saved. Save now?" (buffer-name))))
           (save-buffer (current-buffer)))
         (let ((buffer (scala-extras-create-buffer)))
-          (call-process-region nil nil scala-extras-command nil buffer t "." "-q")
+          (call-process-region nil nil scala-extras-command nil buffer t "." scala-extras-execution-arguments)
           (if switch (switch-to-buffer buffer)))))))
 
 (defun scala-extras-execute-directory-and-switch ()
@@ -56,5 +56,5 @@
    Mode chooses whether to execute as a scala buffer or scala script.
    Returns the buffer used."
   (let ((buffer (scala-extras-create-buffer)))
-    (call-process-region begin end scala-extras-command nil buffer t mode "-q")
+    (call-process-region begin end scala-extras-command nil buffer t mode scala-extras-execution-arguments)
     (if switch (switch-to-buffer buffer))))
