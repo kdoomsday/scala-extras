@@ -59,10 +59,19 @@
     (call-process-region begin end scala-extras-command nil buffer t mode scala-extras-execution-arguments)
     (if switch (switch-to-buffer buffer))))
 
+(defun scala-extras-copy-output-dir ()
+    "Copy all the contents of the output directory"
+  (with-current-buffer scala-extras-output-buffer-name
+    (clipboard-kill-region (point-min) (point-max))))
 
-(defun scala-extras-call-to-clipboard ()
+(defun scala-extras-execute-to-clipboard ()
   "Call Scala-Cli on region or buffer and copy output to clipboard"
   (interactive)
   (scala-extras-execute)
-  (with-current-buffer scala-extras-output-buffer-name
-    (clipboard-kill-region (point-min) (point-max))))
+  (scala-extras-copy-output-dir))
+
+(defun scala-extras-execute-directory-to-clipboard ()
+  "Call the entire directory as a scala-cli project and copy the output to clipboard"
+  (interactive)
+  (scala-extras-execute-directory)
+  (scala-extras-copy-output-dir))
