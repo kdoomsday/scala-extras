@@ -5,9 +5,6 @@
 # under ":spacetools.spacedoc.config/valid-tags" section.
 #+TAGS: layer|web service
 
-# The maximum height of the logo should be 200 pixels.
-[[img/scala-extras.png]]
-
 # TOC links should be GitHub style anchors.
 * Table of Contents                                        :TOC_4_gh:noexport:
 - [[#description][Description]]
@@ -31,6 +28,16 @@ The first mode, ~scala-extras-execute~, runs the selected region (or full buffer
 if no region) and sends the output to the output buffer. The second,
 ~scala-extras-execute-directory~, gets the directory of the active buffer and
 sends that to scala-cli, to run as a project.
+
+| Function                                    | Description                                             |
+|---------------------------------------------+---------------------------------------------------------|
+| scala-extras-execute                        | Execute buffer or region                                |
+| scala-extras-execute-and-switch             | Execute buffer or region and switch to output buffer    |
+| scala-extras-execute-to-clipboard           | Execute buffer or region and copy output to clipboard   |
+|---------------------------------------------+---------------------------------------------------------|
+| scala-extras-execute-directory              | Execute buffer's directory as a scala-cli project       |
+| scala-extras-execute-directory-and-switch   | Execute buffer's directory and switch to output buffer  |
+| scala-extras-execute-directory-to-clipboard | Execute buffer's directory and copy output to clibboard |
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
