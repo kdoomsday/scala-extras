@@ -58,3 +58,11 @@
   (let ((buffer (scala-extras-create-buffer)))
     (call-process-region begin end scala-extras-command nil buffer t mode scala-extras-execution-arguments)
     (if switch (switch-to-buffer buffer))))
+
+
+(defun scala-extras-call-to-clipboard ()
+  "Call Scala-Cli on region or buffer and copy output to clipboard"
+  (interactive)
+  (scala-extras-execute)
+  (with-current-buffer scala-extras-output-buffer-name
+    (clipboard-kill-region (point-min) (point-max))))
