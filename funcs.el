@@ -29,6 +29,7 @@
           (save-buffer (current-buffer)))
         (let ((buffer (scala-extras-create-buffer)))
           (call-process-region nil nil scala-extras-command nil buffer t "." scala-extras-execution-arguments)
+          (with-current-buffer buffer (ansi-color-apply-on-region (point-min) (point-max)))
           (if switch (switch-to-buffer buffer)))))))
 
 (defun scala-extras-execute-directory-and-switch ()
@@ -57,6 +58,8 @@
    Returns the buffer used."
   (let ((buffer (scala-extras-create-buffer)))
     (call-process-region begin end scala-extras-command nil buffer t mode scala-extras-execution-arguments)
+    (with-current-buffer buffer
+      (ansi-color-apply-on-region (point-min) (point-max)))
     (if switch (switch-to-buffer buffer))))
 
 (defun scala-extras-copy-output-dir ()
