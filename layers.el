@@ -1,1 +1,1 @@
-(configuration-layer/declare-layer "scala")
+(configuration-layer/declare-layer 'scala)
