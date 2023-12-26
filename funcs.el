@@ -78,3 +78,28 @@
   (interactive)
   (scala-extras-execute-directory)
   (scala-extras-copy-output-dir))
+
+;; Hydra for operations
+(with-eval-after-load 'hydra
+  (defhydra hydra-scala (nil nil)
+    "
+Scala-cli
+
+Execute Buffer               Execute directory
+--------------------------------------------------------------------------------
+_e_ Execute and go to buffer   _d_ Execute directory and go to buffer
+_E_ Execute and stay here      _D_ Execute directory
+_c_ Execute and copy output    _C_ Execute directory and copy output
+
+_q_ Quit
+
+"
+    ("e" scala-extras-execute-and-switch "execute and go" :exit t)
+    ("E" scala-extras-execute "execute")
+    ("d" scala-extras-execute-directory-and-switch "execute dir and go" :exit t)
+    ("D" scala-extras-execute-directory "execute dir")
+    ("c" scala-extras-execute-to-clipboard "execute and copy" :exit t)
+    ("C" scala-extras-execute-directory-to-clipboard "execute dir and copy" :exit t)
+    ("q" nil "quit")
+    )
+  )
