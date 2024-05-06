@@ -26,17 +26,6 @@
 ;; a new layer:
 ;;
 ;;   SPC h SPC layers RET
-;;
-;;
-;; Briefly, each package to be installed or configured by this layer should be
-;; added to `scala-extras-packages'. Then, for each package PACKAGE:
-;;
-;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `scala-extras/init-PACKAGE' to load and initialize the package.
-
-;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `scala-extras/pre-init-PACKAGE' and/or
-;;   `scala-extras/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 

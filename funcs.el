@@ -87,6 +87,7 @@ Scala-cli
 
 Execute Buffer               Execute directory
 --------------------------------------------------------------------------------
+_s_ Execute and go to buffer
 _e_ Execute and go to buffer   _d_ Execute directory and go to buffer
 _E_ Execute and stay here      _D_ Execute directory
 _c_ Execute and copy output    _C_ Execute directory and copy output
@@ -94,6 +95,7 @@ _c_ Execute and copy output    _C_ Execute directory and copy output
 _q_ Quit
 
 "
+    ("s" scala-extras-execute-and-switch "execute and go" :exit t)
     ("e" scala-extras-execute-and-switch "execute and go" :exit t)
     ("E" scala-extras-execute "execute")
     ("d" scala-extras-execute-directory-and-switch "execute dir and go" :exit t)
