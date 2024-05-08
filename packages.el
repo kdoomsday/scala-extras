@@ -30,7 +30,9 @@
 ;;; Code:
 
 (defconst scala-extras-packages
-  '()
+  '(
+    (ob-scala :location local)
+    )
   "The list of Lisp packages required by the scala-extras layer.
 
 Each entry is either:
@@ -57,3 +59,7 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+
+(defun scala-extras/init-ob-scala ()
+  ;; Initialize ob-scala
+    (use-package ob-scala :defer t))
