@@ -79,7 +79,7 @@
 ;; possibly require modes required for your language
 
 ;; optionally define a file extension for this language
-(add-to-list 'org-babel-tangle-lang-exts '("scala" . "scala"))
+(add-to-list 'org-babel-tangle-lang-exts '("scala" . "sc"))
 
 ;; optionally declare default header arguments for this language
 (defvar org-babel-default-header-args:scala '())
@@ -120,6 +120,9 @@
 ;; "session" evaluation).  Also you are free to define any new header
 ;; arguments which you feel may be useful -- all header arguments
 ;; specified by the user will be available in the PARAMS variable.
+;; == Header arguments ==
+;; :eval-type If it is "source" evaluate code as a source file. Otherwise evaluate
+;;    as a script file
 (defun org-babel-execute:scala (body params)
   "Execute a block of Scala code with org-babel.
 This function is called by `org-babel-execute-src-block'"
@@ -139,7 +142,10 @@ This function is called by `org-babel-execute-src-block'"
          (result-type (assq :result-type processed-params))
          ;; expand the body with `org-babel-expand-body:scala'
          (full-body (org-babel-expand-body:scala
-                     body params processed-params)))
+                     body params processed-params))
+         (evalType (if (string= (alist-get :eval-type params) "source")
+                       "_"
+                     "_.sc")))
     ;; actually execute the source-code block either in a session or
     ;; possibly by dropping it to a temporary file and evaluating the
     ;; file.
@@ -154,9 +160,10 @@ This function is called by `org-babel-execute-src-block'"
     ;; other language, please preprocess any file names involved with
     ;; the function `org-babel-process-file-name'. (See the way that
     ;; function is used in the language files)
-    ;; (shell-command (concat "echo " full-body " | scala-cli -q _.sc"))
     ;; (message full-body)
-    (org-babel-eval (format "%s %s _.sc" scala-extras-command scala-extras-execution-arguments) full-body)
+    (org-babel-eval
+     (format "%s %s %s" scala-extras-command scala-extras-execution-arguments evalType)
+     full-body)
     ))
 
 ;; This function should be used to assign any variables in params in
