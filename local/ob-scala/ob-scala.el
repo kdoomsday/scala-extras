@@ -96,7 +96,7 @@
     (concat
      (mapconcat ;; define any variables
       (lambda (pair)
-        (format "val %s=%S"
+        (format "val %s=%s"
                 (car pair) (org-babel-scala-var-to-scala (cdr pair))))
       vars "\n")
      "\n" body "\n")))
@@ -174,14 +174,21 @@ This function is called by `org-babel-execute-src-block'"
   "Prepare SESSION according to the header arguments specified in PARAMS."
   )
 
+(defun ob-scala-make-string (x)
+    ;; Make variables strings as is possible
+  (cond ((numberp x) (number-to-string x))
+        ((listp x) (mapconcat 'ob-scala-make-string x ", "))
+        (t x)
+        )
+  )
+
 (defun org-babel-scala-var-to-scala (var)
   "Convert an elisp var into a string of scala source code
-   specifying a var of the same value.
-   TODO Make lists come in as lists
-   TODO Make maps come in as maps"
+   specifying a var of the same value."
   (cond ((eq var "true") var)
         ((eq var "false") var)
         ((numberp var) var)
+        ((listp var) (format "List(%S)" (ob-scala-make-string var)))
         (t (format "%s" var))
         )
   )
