@@ -123,6 +123,7 @@
 ;; == Header arguments ==
 ;; :eval-type If it is "source" evaluate code as a source file. Otherwise evaluate
 ;;    as a script file
+;; :options Everything here will be passed as options to scala-cli verbatim
 (defun org-babel-execute:scala (body params)
   "Execute a block of Scala code with org-babel.
 This function is called by `org-babel-execute-src-block'"
@@ -145,7 +146,8 @@ This function is called by `org-babel-execute-src-block'"
                      body params processed-params))
          (evalType (if (string= (alist-get :eval-type params) "source")
                        "_"
-                     "_.sc")))
+                     "_.sc"))
+         (options (alist-get :options params)))
     ;; actually execute the source-code block either in a session or
     ;; possibly by dropping it to a temporary file and evaluating the
     ;; file.
@@ -162,7 +164,7 @@ This function is called by `org-babel-execute-src-block'"
     ;; function is used in the language files)
     ;; (message full-body)
     (org-babel-eval
-     (format "%s %s %s" scala-extras-command scala-extras-execution-arguments evalType)
+     (format "%s %s %s %s" scala-extras-command scala-extras-execution-arguments options evalType)
      full-body)
     ))
 
