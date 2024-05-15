@@ -9,6 +9,7 @@
 * Table of Contents                                        :TOC_4_gh:noexport:
 - [[#description][Description]]
   - [[#features][Features:]]
+    - [[#ob-scala][=ob-scala=]]
 - [[#install][Install]]
 
 * Description
@@ -16,6 +17,7 @@ This layer adds support for running scala code directly through =scala-cli=.
 
 ** Features:
   - Run scala scripts directly via =scala-cli=
+  - Enable =ob-scala= so you can evaluate org src blocks with =scala-cli=
 
 The main functions to be aware of are ~scala-extras-execute~ and
 ~scala-extras-execute-directory~. Both also have ~-and-switch~ versions that
@@ -38,6 +40,21 @@ sends that to scala-cli, to run as a project.
 | scala-extras-execute-directory              | Execute buffer's directory as a scala-cli project       |
 | scala-extras-execute-directory-and-switch   | Execute buffer's directory and switch to output buffer  |
 | scala-extras-execute-directory-to-clipboard | Execute buffer's directory and copy output to clibboard |
+
+*** =ob-scala=
+To enable Scala in Org Mode source blocks add the language to org initialization:
+#+begin_src elisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((scala . t) ... ))
+#+end_src
+
+Or you can load immediately:
+#+begin_src elisp
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               (append org-babel-load-languages '((scala . t)))
+#+end_src
+
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
