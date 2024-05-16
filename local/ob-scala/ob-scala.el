@@ -147,7 +147,7 @@ This function is called by `org-babel-execute-src-block'"
          (evalType (if (string= (alist-get :eval-type params) "source")
                        "_"
                      "_.sc"))
-         (options (alist-get :options params)))
+         (options (or (alist-get :options params) "")))
     ;; actually execute the source-code block either in a session or
     ;; possibly by dropping it to a temporary file and evaluating the
     ;; file.
@@ -162,7 +162,8 @@ This function is called by `org-babel-execute-src-block'"
     ;; other language, please preprocess any file names involved with
     ;; the function `org-babel-process-file-name'. (See the way that
     ;; function is used in the language files)
-    ;; (message full-body)
+    (message full-body)
+    (message (format "%s %s %s %s" scala-extras-command scala-extras-execution-arguments options evalType))
     (org-babel-eval
      (format "%s %s %s %s" scala-extras-command scala-extras-execution-arguments options evalType)
      full-body)
