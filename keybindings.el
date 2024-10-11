@@ -8,3 +8,4 @@
   "osD" 'scala-extras-execute-directory
   "osc" 'scala-extras-execute-to-clipboard
   "os." 'hydra-scala/body)
+(spacemacs/set-leader-keys-for-major-mode 'scala-mode "ox" 'lsp-metals-run-scalafix)
