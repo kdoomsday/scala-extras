@@ -162,8 +162,8 @@ This function is called by `org-babel-execute-src-block'"
     ;; other language, please preprocess any file names involved with
     ;; the function `org-babel-process-file-name'. (See the way that
     ;; function is used in the language files)
-    (message full-body)
-    (message (format "%s %s %s %s" scala-extras-command scala-extras-execution-arguments options evalType))
+    ;; (message full-body)
+    ;; (message (format "%s %s %s %s" scala-extras-command scala-extras-execution-arguments options evalType))
     (org-babel-eval
      (format "%s %s %s %s" scala-extras-command scala-extras-execution-arguments options evalType)
      full-body)
