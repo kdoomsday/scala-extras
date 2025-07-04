@@ -48,7 +48,7 @@
   (let ((buffer (get-buffer-create scala-extras-output-buffer-name)))
     (if scala-extras-keep-buffer-contents
         (with-current-buffer buffer (goto-char (point-max)))
-        (with-current-buffer buffer (erase-buffer)))
+      (with-current-buffer buffer (erase-buffer)))
     buffer))
 
 (defun scala-extras-call (begin end mode &optional switch)
@@ -63,7 +63,7 @@
     (if switch (switch-to-buffer buffer))))
 
 (defun scala-extras-copy-output-dir ()
-    "Copy all the contents of the output directory"
+  "Copy all the contents of the output directory"
   (with-current-buffer scala-extras-output-buffer-name
     (clipboard-kill-region (point-min) (point-max))))
 
@@ -87,9 +87,10 @@ Scala-cli
 
 Execute Buffer               Execute directory
 --------------------------------------------------------------------------------
-_s_ Execute and go to buffer
-_e_ Execute and go to buffer   _d_ Execute directory and go to buffer
-_E_ Execute and stay here      _D_ Execute directory
+_E_ Execute                    _D_ Execute directory
+_S_ Execute
+_s_ Execute and go to buffer   _d_ Execute directory and go to buffer
+_e_ Execute and go to buffer
 _c_ Execute and copy output    _C_ Execute directory and copy output
 
 _q_ Quit
@@ -97,6 +98,7 @@ _q_ Quit
 "
     ("s" scala-extras-execute-and-switch "execute and go" :exit t)
     ("e" scala-extras-execute-and-switch "execute and go" :exit t)
+    ("S" scala-extras-execute "execute")
     ("E" scala-extras-execute "execute")
     ("d" scala-extras-execute-directory-and-switch "execute dir and go" :exit t)
     ("D" scala-extras-execute-directory "execute dir")
