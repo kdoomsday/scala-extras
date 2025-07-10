@@ -27,3 +27,8 @@
   :type 'string
   :group 'Scala-Extras)
 
+
+(defcustom scala-extras-split-direction 'right
+  "Direction to split the window (right, below, or no split)"
+  :type '(choice string (const right) (const below) (const none))
+  :group 'Scala-Extras)

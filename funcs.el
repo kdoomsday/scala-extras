@@ -60,7 +60,19 @@
     (call-process-region begin end scala-extras-command nil buffer t mode scala-extras-execution-arguments)
     (with-current-buffer buffer
       (ansi-color-apply-on-region (point-min) (point-max)))
-    (if switch (switch-to-buffer buffer))))
+    (if switch
+        (scala-extras-do-window-split buffer))))
+
+(defun scala-extras-do-window-split (buffer)
+  "Look at scala-extras-split-direction and do the right thing.
+   Independent of split, specified buffer will have the focus"
+  (progn
+    (case scala-extras-split-direction
+      ('right (progn (split-window-right) (other-window 1)))
+      ('below (progn (split-window-below) (other-window 1)))
+      ('none nil))
+    (switch-to-buffer buffer))
+  )
 
 (defun scala-extras-copy-output-dir ()
   "Copy all the contents of the output directory"
