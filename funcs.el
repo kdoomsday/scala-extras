@@ -67,10 +67,10 @@
   "Look at scala-extras-split-direction and do the right thing.
    Independent of split, specified buffer will have the focus"
   (progn
-    (case scala-extras-split-direction
-      ('right (progn (split-window-right) (other-window 1)))
-      ('below (progn (split-window-below) (other-window 1)))
-      ('none nil))
+    (cl-case scala-extras-split-direction
+      (right (progn (split-window-right) (other-window 1)))
+      (below (progn (split-window-below) (other-window 1)))
+      (none nil))
     (switch-to-buffer buffer))
   )
 
