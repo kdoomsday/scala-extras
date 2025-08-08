@@ -148,7 +148,7 @@ This function is called by `org-babel-execute-src-block'"
                      "_.sc"))
          (verbose (assoc :verbose params))
          (verboseOpts (if verbose "--verbose" "-q"))
-         (logCommand (assoc :logCommand params))
+         (logCommand (assoc :log-command params))
          (options (or (alist-get :options params) ""))
          (executeCommand (format "%s %s %s %s %s"
                                  scala-extras-command

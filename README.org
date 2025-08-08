@@ -11,6 +11,7 @@
   - [[#features][Features:]]
     - [[#ob-scala][=ob-scala=]]
       - [[#header-arguments][Header arguments]]
+      - [[#eval-type][Eval Type]]
 - [[#install][Install]]
 
 * Description
@@ -58,9 +59,22 @@ Or you can load immediately:
 
 
 **** Header arguments
-| :verbose    | Run scala-cli with '--verbose'. Default is '-q'       |
-| :logCommand | Log the run command and all source to Messages buffer |
-| :options    | Pass additional options to scala-cli when running     |
+| :verbose     | Run scala-cli with '--verbose'. Default is '-q'                   |
+| :log-command | Log the run command and all source to Messages buffer             |
+| :eval-type   | If "source", run snippet as a source file instead of as a scriptt |
+| :options     | Pass additional options to scala-cli when running                 |
+
+**** Eval Type
+Setting =:eval-type source= will make the block be evaluated as a source file
+instead of as a script. This means your code has to be wrapped in some sort of
+~main~ function for it to run properly.
+
+This is useful, for instance, when evaluating different main runners, which
+don't work on script files. For example, ~IOApp~ from =Cats= or ~ZIOApp~ from
+=ZIO=.
+
+Any other =eval-type= will be treated as the default, which is to evaluate as a
+script.
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
