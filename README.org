@@ -10,6 +10,7 @@
 - [[#description][Description]]
   - [[#features][Features:]]
     - [[#ob-scala][=ob-scala=]]
+      - [[#header-arguments][Header arguments]]
 - [[#install][Install]]
 
 * Description
@@ -55,6 +56,11 @@ Or you can load immediately:
                                (append org-babel-load-languages '((scala . t)))
 #+end_src
 
+
+**** Header arguments
+| :verbose    | Run scala-cli with '--verbose'. Default is '-q'       |
+| :logCommand | Log the run command and all source to Messages buffer |
+| :options    | Pass additional options to scala-cli when running     |
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
