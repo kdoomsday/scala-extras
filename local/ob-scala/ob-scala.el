@@ -127,7 +127,6 @@
 (defun org-babel-execute:scala (body params)
   "Execute a block of Scala code with org-babel.
 This function is called by `org-babel-execute-src-block'"
-  (message "executing Scala source code block")
   (let* ((processed-params (org-babel-process-params params))
          ;; set the session if the value of the session keyword is not the
          ;; string `none'
@@ -147,7 +146,16 @@ This function is called by `org-babel-execute-src-block'"
          (evalType (if (string= (alist-get :eval-type params) "source")
                        "_"
                      "_.sc"))
-         (options (or (alist-get :options params) "")))
+         (verbose (assoc :verbose params))
+         (verboseOpts (if verbose "--verbose" "-q"))
+         (logCommand (assoc :logCommand params))
+         (options (or (alist-get :options params) ""))
+         (executeCommand (format "%s %s %s %s %s"
+                                 scala-extras-command
+                                 scala-extras-execution-arguments
+                                 verboseOpts
+                                 options
+                                 evalType)))
     ;; actually execute the source-code block either in a session or
     ;; possibly by dropping it to a temporary file and evaluating the
     ;; file.
@@ -164,9 +172,9 @@ This function is called by `org-babel-execute-src-block'"
     ;; function is used in the language files)
     ;; (message full-body)
     ;; (message (format "%s %s %s %s" scala-extras-command scala-extras-execution-arguments options evalType))
-    (org-babel-eval
-     (format "%s %s %s %s" scala-extras-command scala-extras-execution-arguments options evalType)
-     full-body)
+    (message (format "Executing scala block (verbose=%s)" (if verbose "true" "false")))
+    (if logCommand (org-babel-scala-log-full-command executeCommand full-body))
+    (org-babel-eval executeCommand full-body)
     ))
 
 ;; This function should be used to assign any variables in params in
@@ -176,7 +184,7 @@ This function is called by `org-babel-execute-src-block'"
   )
 
 (defun ob-scala-make-string (x)
-    ;; Make variables strings as is possible
+  ;; Make variables strings as is possible
   (cond ((numberp x) (number-to-string x))
         ((listp x) (mapconcat 'ob-scala-make-string x ", "))
         (t x)
@@ -204,6 +212,15 @@ Emacs-lisp table, otherwise return the results as a string."
 Return the initialized session."
   (unless (string= session "none")
     ))
+
+(defun org-babel-scala-log-full-command (executeCommand full-body)
+  "Log the full command to the messages buffer"
+  (progn
+    (message (format "Execute command - %s" executeCommand))
+    (message "--- Body -----------------------------------------------------------------------")
+    (message full-body)
+    (message "--- End Body -------------------------------------------------------------------"))
+  )
 
 (provide 'ob-scala)
 ;;; ob-scala.el ends here
