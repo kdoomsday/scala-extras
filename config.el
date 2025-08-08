@@ -22,7 +22,7 @@
   :type 'boolean
   :group 'Scala-Extras)
 
-(defcustom scala-extras-execution-arguments ""
+(defcustom scala-extras-execution-arguments "-q"
   "Extra arguments to be passed to scala-cli when calling"
   :type 'string
   :group 'Scala-Extras)
