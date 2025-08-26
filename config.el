@@ -8,8 +8,8 @@
   :type 'string
   :group 'Scala-Extras)
 
-(defcustom scala-extras-command "scala-cli"
-  "Command used to execute scala code. Default 'scala-cli'.
+(defcustom scala-extras-command "scala"
+  "Command used to execute scala code. Default 'scala'.
   You can provide the command with explicit path to use a specific version"
   :type 'string
   :group 'Scala-Extras)
