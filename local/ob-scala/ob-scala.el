@@ -143,9 +143,12 @@ This function is called by `org-babel-execute-src-block'"
          ;; expand the body with `org-babel-expand-body:scala'
          (full-body (org-babel-expand-body:scala
                      body params processed-params))
-         (evalType (if (string= (alist-get :eval-type params) "source")
-                       "_"
-                     "_.sc"))
+         (evalType (cond
+                    ((or
+                      (string= (alist-get :eval-type params) "source")
+                      (assoc :source params))
+                     "_")
+                    (t "_.sc")))
          (verbose (assoc :verbose params))
          (verboseOpts (if verbose "--verbose" "-q"))
          (logCommand (assoc :log-command params))
