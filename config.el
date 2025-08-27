@@ -34,6 +34,9 @@
   :group 'Scala-Extras)
 
 ;; Configure errors for Mill builds
-(push 'mill compilation-error-regexp-alist)
-(push '(mill ".*\\[error\\] -- .*: \\([/a-zA-Z-_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3)
-      compilation-error-regexp-alist-alist)
+(with-eval-after-load 'compile
+  (progn
+    (push 'mill compilation-error-regexp-alist)
+    (push '(mill ".*\\[error\\] -- .*: \\([/a-zA-Z-_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3)
+          compilation-error-regexp-alist-alist)
+    ))
