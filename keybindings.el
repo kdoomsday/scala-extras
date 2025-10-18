@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (spacemacs/declare-prefix "o" "other")
 (spacemacs/declare-prefix "os" "scala-extras")
 (spacemacs/set-leader-keys

@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (defun scala-extras-execute-region (&optional switch)
   "Run scala-cli on selected region"
   (scala-extras-call (region-beginning) (region-end) "_.sc" switch))

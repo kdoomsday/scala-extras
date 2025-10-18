@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (defgroup Scala-Extras nil
   "Scala Programming Language"
   :group 'convenience

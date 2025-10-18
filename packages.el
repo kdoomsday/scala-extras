@@ -1,4 +1,4 @@
-;;; packages.el --- scala-extras layer packages file for Spacemacs.
+;;; packages.el --- scala-extras layer packages file for Spacemacs.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (c) 2012-2022 Sylvain Benner & Contributors
 ;;
@@ -62,4 +62,4 @@ Each entry is either:
 
 (defun scala-extras/init-ob-scala ()
   ;; Initialize ob-scala
-    (use-package ob-scala :defer t))
+  (use-package ob-scala :defer t))
