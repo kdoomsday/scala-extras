@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;; ob-scala.el --- org-babel functions for scala evaluation
 
 ;; Copyright (C) your name here
