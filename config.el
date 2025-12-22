@@ -38,6 +38,6 @@
 (with-eval-after-load 'compile
   (progn
     (push 'mill compilation-error-regexp-alist)
-    (push '(mill ".*\\[error\\] -- .*: \\([/a-zA-Z-_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3)
+    (push '(mill ".*\\[error\\|warn\\] -- .*: \\([/a-zA-Z-_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 1 2 3)
           compilation-error-regexp-alist-alist)
     ))
