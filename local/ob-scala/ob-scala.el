@@ -188,21 +188,12 @@ This function is called by `org-babel-execute-src-block'"
   "Prepare SESSION according to the header arguments specified in PARAMS."
   )
 
-(defun ob-scala-make-string (x)
-  ;; Make variables strings as is possible
-  (cond ((numberp x) (number-to-string x))
-        ((listp x) (mapconcat 'ob-scala-make-string x ", "))
-        (t x)
-        )
-  )
-
 (defun org-babel-scala-var-to-scala (var)
   "Convert an elisp var into a string of scala source code
    specifying a var of the same value."
   (cond ((numberp var) (number-to-string var))
         ((and (stringp var) (string-equal var "true")) var)
         ((and (stringp var) (string-equal var "false")) var)
-        ;; ((listp var) (format "List(%S)" (ob-scala-make-string var)))
         ((listp var) (format "List(%s)" (mapconcat 'org-babel-scala-var-to-scala var ", ")))
         (t (format "\"\"\"%s\"\"\"" var))
         )
