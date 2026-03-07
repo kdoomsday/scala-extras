@@ -199,11 +199,12 @@ This function is called by `org-babel-execute-src-block'"
 (defun org-babel-scala-var-to-scala (var)
   "Convert an elisp var into a string of scala source code
    specifying a var of the same value."
-  (cond ((eq var "true") var)
-        ((eq var "false") var)
-        ((numberp var) var)
-        ((listp var) (format "List(%S)" (ob-scala-make-string var)))
-        (t (format "%s" var))
+  (cond ((numberp var) (number-to-string var))
+        ((and (stringp var) (string-equal var "true")) var)
+        ((and (stringp var) (string-equal var "false")) var)
+        ;; ((listp var) (format "List(%S)" (ob-scala-make-string var)))
+        ((listp var) (format "List(%s)" (mapconcat 'org-babel-scala-var-to-scala var ", ")))
+        (t (format "\"\"\"%s\"\"\"" var))
         )
   )
 
