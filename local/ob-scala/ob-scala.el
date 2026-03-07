@@ -152,7 +152,7 @@ This function is called by `org-babel-execute-src-block'"
                      "_")
                     (t "_.sc")))
          (verbose (assoc :verbose params))
-         (verboseOpts (if verbose "--verbose" "-q"))
+         (verboseOpts (if verbose "--verbose" ""))
          (logCommand (assoc :log-command params))
          (options (or (alist-get :options params) ""))
          (executeCommand (format "%s %s %s %s %s"
@@ -186,8 +186,17 @@ This function is called by `org-babel-execute-src-block'"
 ;; the context of the session environment.
 (defun org-babel-prep-session:scala (session params)
   "Prepare SESSION according to the header arguments specified in PARAMS."
+  (message ">>> Inside prep session")
   )
 
+;; This is used to convert anything defined in a :var header into a Scala val.
+;; The following things are handled:
+;; - Numbers are passed as their string representation
+;; - Strings are created with triple quotes in order to be able to handle multiline strings
+;; - The literal string "true" becomes the boolean true
+;; - The literal string "false" becomes the boolean false
+;; - Lists are wrapped in a ~List~ constructor
+;;   - The lists values are handled recursively by this same function
 (defun org-babel-scala-var-to-scala (var)
   "Convert an elisp var into a string of scala source code
    specifying a var of the same value."
