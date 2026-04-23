@@ -32,6 +32,7 @@
 (defconst scala-extras-packages
   '(
     (ob-scala :location local)
+    (scala-ts-mode)
     )
   "The list of Lisp packages required by the scala-extras layer.
 
@@ -63,3 +64,7 @@ Each entry is either:
 (defun scala-extras/init-ob-scala ()
   ;; Initialize ob-scala
   (use-package ob-scala :defer t))
+
+(defun scala-extras/init-scala-ts-mode ()
+  ;; Initialize scala-ts-mode
+  (use-package scala-ts-mode :defer t))

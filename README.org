@@ -17,6 +17,7 @@
 
 * Description
 This layer adds support for running scala code directly through =scala-cli=.
+It also enables =scala-ts-mode= that leverages =treesitter=.
 
 ** Features:
   - Run scala scripts directly via =scala-cli=

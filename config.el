@@ -41,3 +41,26 @@
     (push '(mill ".*\\[\\(error\\|warn\\)\\] -- .*: \\([/0-9a-zA-Z-_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 2 3 4)
           compilation-error-regexp-alist-alist)
     ))
+
+;; Use scala-ts-mode for .mill files
+(add-to-list 'auto-mode-alist '("\\.mill" . scala-ts-mode))
+
+;; Configurations
+(with-eval-after-load 'scala-ts-mode
+  (progn
+    (setopt treesit-font-lock-level 4)       ;; Show actual color highlights
+    (add-hook 'scala-ts-mode-hook 'lsp)      ;; Enable lsp-mode and dap-mode
+    (add-hook 'scala-ts-mode-hook 'dap-mode)
+    ;; Key bindings to restore expected functionality from the scala layer
+    (spacemacs/declare-prefix-for-mode 'scala-ts-mode "mb" "sbt")
+    (spacemacs/declare-prefix-for-mode 'scala-ts-mode "mg" "goto")
+    (evil-define-key 'normal scala-ts-mode-map "J" 'spacemacs/scala-join-line)
+    (spacemacs/set-leader-keys-for-major-mode 'scala-ts-mode
+      "b." 'sbt-hydra
+      "bb" 'sbt-command
+      "bc" #'spacemacs/scala-sbt-compile
+      "bt" #'spacemacs/scala-sbt-test
+      "bI" #'spacemacs/scala-sbt-compile-it
+      "bT" #'spacemacs/scala-sbt-compile-test
+      "b=" #'spacemacs/scala-sbt-scalafmt-all)
+    ))
