@@ -45,6 +45,11 @@
 ;; Use scala-ts-mode for .mill files
 (add-to-list 'auto-mode-alist '("\\.mill" . scala-ts-mode))
 
+;; Configure the tree sitter languange so we can install
+(if (boundp 'treesit-language-source-alist)
+    (add-to-list 'treesit-language-source-alist '(scala "https://github.com/tree-sitter/tree-sitter-scala"))
+  (setq treesit-language-source-alist '((scala "https://github.com/tree-sitter/tree-sitter-scala"))))
+
 ;; Configurations
 (with-eval-after-load 'scala-ts-mode
   (progn
