@@ -98,16 +98,16 @@
     (with-temp-buffer
       (insert body)
       (goto-char (point-min))
-      (goto--first-non-matching-line "^[ \t]*//>\\|^[ \t]*$")
+      (goto--first-non-directive-line)
 
-      (insert
-       (mapconcat ;; Variable definitions
+      (insert ;; Variable definitions
+       (mapconcat
         (lambda (pair)
           (format "val %s=%s"
                   (car pair) (org-babel-scala-var-to-scala (cdr pair))))
         vars "\n"))
       (insert "\n")
-      (buffer-string)
+      (buffer-string) ;; Return the buffer contents
       )
     ))
 
@@ -126,6 +126,10 @@
             (setq found t)
           (forward-line 1))))
     (if found (beginning-of-line))))
+
+(defun goto--first-non-directive-line ()
+  "Move point to beginning of first line that is not a directive. ALlows empty lines between directives"
+  (goto--first-non-matching-line "^[ \t]*//>\\|^[ \t]*$"))
 
 ;; This is the main function which is called to evaluate a code
 ;; block.
