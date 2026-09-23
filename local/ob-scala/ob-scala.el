@@ -95,13 +95,37 @@
   "Expand BODY according to PARAMS, return the expanded body."
   (require 'inf-scala nil t)
   (let ((vars (org-babel--get-vars (or processed-params (org-babel-process-params params)))))
-    (concat
-     (mapconcat ;; define any variables
-      (lambda (pair)
-        (format "val %s=%s"
-                (car pair) (org-babel-scala-var-to-scala (cdr pair))))
-      vars "\n")
-     "\n" body "\n")))
+    (with-temp-buffer
+      (insert body)
+      (goto-char (point-min))
+      (goto--first-non-matching-line "^//>")
+
+      (insert
+       (mapconcat ;; Variable definitions
+        (lambda (pair)
+          (format "val %s=%s"
+                  (car pair) (org-babel-scala-var-to-scala (cdr pair))))
+        vars "\n"))
+      (insert "\n")
+      (buffer-string)
+      )
+    ))
+
+
+;; Attempt to find first line that does not match a regexp
+;; We use this to find where directives end and insert val declarations there
+(defun goto--first-non-matching-line (regexp)
+  "Move point to the first line that does not match REGEXPs."
+  (goto-char (point-min))
+  (let ((found nil))
+    (while (and (not (eobp)) (not found))
+      (let ((line (buffer-substring-no-properties
+                   (line-beginning-position)
+                   (line-end-position))))
+        (if (not (string-match-p regexp line))
+            (setq found t)
+          (forward-line 1))))
+    (if found (beginning-of-line))))
 
 ;; This is the main function which is called to evaluate a code
 ;; block.
