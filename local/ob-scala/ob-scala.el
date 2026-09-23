@@ -128,8 +128,10 @@
     (if found (beginning-of-line))))
 
 (defun goto--first-non-directive-line ()
-  "Move point to beginning of first line that is not a directive. ALlows empty lines between directives"
-  (goto--first-non-matching-line "^[ \t]*//>\\|^[ \t]*$"))
+  "Move point to beginning of first line that is not a directive.
+   Allows empty lines between directives, single line comments, and shebangs.
+   Multiline comments are not supported."
+  (goto--first-non-matching-line "^[ \t]*//\\|^[ \t]*$\\|^#!"))
 
 ;; This is the main function which is called to evaluate a code
 ;; block.
