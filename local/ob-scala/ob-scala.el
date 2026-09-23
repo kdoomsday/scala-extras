@@ -98,7 +98,7 @@
     (with-temp-buffer
       (insert body)
       (goto-char (point-min))
-      (goto--first-non-matching-line "^//>")
+      (goto--first-non-matching-line "^[ \t]*//>\\|^[ \t]*$")
 
       (insert
        (mapconcat ;; Variable definitions
