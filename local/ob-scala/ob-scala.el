@@ -2,12 +2,12 @@
 
 ;;; ob-scala.el --- org-babel functions for scala evaluation
 
-;; Copyright (C) your name here
+;; Copyright (C) Eduardo Barrientos
 
-;; Author: your name here
-;; Keywords: literate programming, reproducible research
-;; Homepage: https://orgmode.org
-;; Version: 0.01
+;; Author: Eduardo Barrientos
+;; Keywords: literate programming, reproducible research, Scala
+;; Homepage: https://github.com/kdoomsday
+;; Version: 0.02
 
 ;;; License:
 
@@ -29,9 +29,9 @@
 ;;; Commentary:
 
 ;; This file is not intended to ever be loaded by org-babel, rather it is a
-;; scala for use in adding new language support to Org-babel. Good first
+;; template for use in adding new language support to Org-babel. Good first
 ;; steps are to copy this file to a file named by the language you are adding,
-;; and then use `query-replace' to replace all strings of "scala" in this
+;; and then use `query-replace' to replace all strings of "template" in this
 ;; file with the name of your new language.
 
 ;; After the `query-replace' step, it is recommended to load the file and
