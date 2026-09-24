@@ -31,7 +31,7 @@
 
 (defconst scala-extras-packages
   '(
-    (ob-scala :location local)
+    (ob-scala :location (recipe :fetcher github :repo "kdoomsday/ob-scala"))
     (scala-ts-mode)
     )
   "The list of Lisp packages required by the scala-extras layer.
