@@ -40,6 +40,8 @@
     (push 'mill compilation-error-regexp-alist)
     (push '(mill ".*\\[\\(error\\|warn\\)\\] -- .*: \\([/0-9a-zA-Z-_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 2 3 4)
           compilation-error-regexp-alist-alist)
+    (push '(mill ".*\\[\\(error\\|warn\\)\\] \\([/0-9a-zA-Z-_\\.]+\\):\\([0-9]+\\):\\([0-9]+\\)" 2 3 4)
+          compilation-error-regexp-alist-alist)
     ))
 
 ;; Use scala-ts-mode for .mill files
